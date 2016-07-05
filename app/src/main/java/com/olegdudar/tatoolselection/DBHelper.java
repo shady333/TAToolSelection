@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     // Logcat tag
@@ -43,19 +47,23 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
             + PRICE_COLUMN + " DOUBLE);";
 
-    DBHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
-                          int version) {
-        super(context, name, factory, version);
-    }
+//    public DBHelper(Context context) {
+//        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+//    }
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
-                          int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
-    }
+//    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
+//                          int version) {
+//        super(context, name, factory, version);
+//    }
+
+//    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
+//                          int version, DatabaseErrorHandler errorHandler) {
+//        super(context, name, factory, version, errorHandler);
+//    }
 
 //    @Override
 //    public void onCreate(SQLiteDatabase db) {
@@ -73,9 +81,10 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 //        onCreate(db);
 //    }
 //
-//    public void clearTable(SQLiteDatabase db, String tableName){
-//        db.execSQL("DROP TABLE IF EXISTS " + tableName);
-//    }
+    public void recreateTable(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TOOLS_TABLE);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -85,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older table
-        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TOOLS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TOOLS_TABLE);
 
         // create new tables
         onCreate(db);
@@ -101,6 +110,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         values.put(SUPPORT_MOBILE_COLUMN, tool.getSupportMobile());
         values.put(SUPPORT_WEB_COLUMN, tool.getSupportWeb());
         values.put(SUPPORT_WEBSERVICES_COLUMN, tool.getSupportWebServices());
+        values.put(ADDED_DATE, getDateTime());
         values.put(VENDOR_COLUMN, tool.getVendor());
 
         db.insert(TOOLS_TABLE, null, values);
@@ -108,28 +118,37 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     }
 
     public Tool selectTool(Tool tool){
+
+        Tool tool1 = null;
+
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT  * FROM " + TOOLS_TABLE + " WHERE "
-                + PRICE_COLUMN + " = " + tool.getPrice() + " AND "
-                + RECORDPLAYBACK_COLUMN + " = " + tool.getRecordPlayback() + " AND "
-                + SUPPORT_DESKTOP_COLUMN + " = " + tool.getSupportDesktop() + " AND "
-                + SUPPORT_MOBILE_COLUMN + " = " + tool.getSupportMobile() + " AND "
-                + SUPPORT_WEB_COLUMN + " = " + tool.getSupportWeb() + " AND "
-                + SUPPORT_WEBSERVICES_COLUMN + " = " + tool.getSupportWebServices() + ";";
+        String selectQuery = "SELECT * FROM " + TOOLS_TABLE + " WHERE "
+//                + PRICE_COLUMN + " = " + tool.getPrice()
+//                + " AND "
+                + RECORDPLAYBACK_COLUMN + " = " + tool.getRecordPlayback()
+//                + " AND "
+//                + SUPPORT_DESKTOP_COLUMN + " = " + tool.getSupportDesktop()
+//                + " AND "
+//                + SUPPORT_MOBILE_COLUMN + " = " + tool.getSupportMobile()
+//                + " AND "
+//                + SUPPORT_WEB_COLUMN + " = " + tool.getSupportWeb()
+//                + " AND "
+//                + SUPPORT_WEBSERVICES_COLUMN + " = " + tool.getSupportWebServices()
+                + ";";
 
         Log.e(LOG, selectQuery);
 
         Cursor c = db.rawQuery(selectQuery, null);
 
-        if (c != null)
+        if (c != null && c.getCount() > 0) {
             c.moveToFirst();
 
-        Tool tool1 = new Tool();
+            tool1 = new Tool();
 
-        tool1.setName(c.getString(c.getColumnIndex(TOOL_NAME_COLUMN)));
-        tool1.setPrice(c.getFloat(c.getColumnIndex(PRICE_COLUMN)));
-
+            tool1.setName(c.getString(c.getColumnIndex(TOOL_NAME_COLUMN)));
+            tool1.setPrice(c.getFloat(c.getColumnIndex(PRICE_COLUMN)));
+        }
         return tool1;
     }
 
@@ -138,5 +157,18 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         SQLiteDatabase db = this.getReadableDatabase();
         if (db != null && db.isOpen())
             db.close();
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    public void deleteTool(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TOOLS_TABLE, TOOL_NAME_COLUMN + " = ?",
+                new String[] { name });
     }
 }
