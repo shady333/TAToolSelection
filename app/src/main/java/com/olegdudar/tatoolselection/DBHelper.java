@@ -10,7 +10,9 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
@@ -83,7 +85,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 //
     public void recreateTable(){
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TOOLS_TABLE);
+        db.execSQL("DELETE FROM " + TOOLS_TABLE);
     }
 
     @Override
@@ -117,7 +119,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     }
 
-    public Tool selectTool(Tool tool){
+    public Tool selectFirstTool(Tool tool){
 
         Tool tool1 = null;
 
@@ -148,8 +150,61 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
             tool1.setName(c.getString(c.getColumnIndex(TOOL_NAME_COLUMN)));
             tool1.setPrice(c.getFloat(c.getColumnIndex(PRICE_COLUMN)));
+
+            c.close();
         }
         return tool1;
+    }
+
+    public List<Tool> selectTools(Tool tool){
+
+        List<Tool> tools = new ArrayList<Tool>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TOOLS_TABLE + " WHERE "
+//                + PRICE_COLUMN + " = " + tool.getPrice()
+//                + " AND "
+                + RECORDPLAYBACK_COLUMN + " IN " + (tool.getRecordPlayback() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_DESKTOP_COLUMN + " IN " + (tool.getSupportDesktop() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_MOBILE_COLUMN + " IN " + (tool.getSupportMobile() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_WEB_COLUMN + " IN " + (tool.getSupportWeb() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_WEBSERVICES_COLUMN + " IN " + (tool.getSupportWebServices() == 1 ? "(1)" : "(0,1)")
+                + ";";
+
+//        StringBuilder request = new StringBuilder();
+//        request.append("SELECT * FROM " + TOOLS_TABLE + " WHERE ");
+//        if(tool.getRecordPlayback() == 1)
+//            request.append(
+
+        Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        Tool tempTool;
+
+        if (c != null && c.getCount() > 0) {
+
+            // looping through all rows and adding to list
+            if (c.moveToFirst()) {
+                do {
+                    tempTool = new Tool();
+
+                    tempTool.setName(c.getString(c.getColumnIndex(TOOL_NAME_COLUMN)));
+                    tempTool.setPrice(c.getFloat(c.getColumnIndex(PRICE_COLUMN)));
+
+                    tools.add(tempTool);
+
+                } while (c.moveToNext());
+            }
+
+            c.close();
+        }
+        return tools;
     }
 
     // closing database

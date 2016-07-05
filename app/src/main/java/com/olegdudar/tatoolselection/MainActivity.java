@@ -8,12 +8,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private DBHelper mDBHelper;
     private SQLiteDatabase mSQLiteDatabase;
 
     private CheckBox recordPlayback;
+    private CheckBox supportWeb;
+    private CheckBox supportMobile;
+    private CheckBox supportWebServices;
+    private CheckBox supportDesktop;
 
     private TextView resultCaption;
     private TextView resultValue;
@@ -28,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recordPlayback = (CheckBox)findViewById(R.id.cb_recordplayback);
+        supportDesktop = (CheckBox)findViewById(R.id.cb_desktop);
+        supportMobile = (CheckBox)findViewById(R.id.cb_mobile);
+        supportWeb = (CheckBox)findViewById(R.id.cb_web);
+        supportWebServices = (CheckBox)findViewById(R.id.cb_webservices);
 
         resultCaption = (TextView)findViewById(R.id.tv_resultCaption);
         resultValue = (TextView)findViewById(R.id.tv_resultValue);
@@ -64,13 +74,53 @@ public class MainActivity extends AppCompatActivity {
             mDBHelper = new DBHelper(getApplicationContext());
         }
 
-        Tool tool1 = new Tool("Test1", "Word1", 1);
-        Tool tool2 = new Tool("Test2", "Word2", 2);
+        Tool tool = new Tool("Test Complete", "Smart Bear", 1000);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(1);
+        mDBHelper.addTool(tool);
 
-        tool1.setRecordPlayback(1);
+        tool.setName("Appium");
+        tool.setVendor("Appium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        mDBHelper.addTool(tool);
 
-        mDBHelper.addTool(tool1);
-        mDBHelper.addTool(tool2);
+        tool.setName("Selenium WebDriver");
+        tool.setVendor("Selenium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Selenium IDE");
+        tool.setVendor("Selenium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Ranorex");
+        tool.setVendor("Ranorex");
+        tool.setPrice(1000);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(1);
+        mDBHelper.addTool(tool);
     }
 
 //    public void recreateDB(View view){
@@ -103,14 +153,24 @@ public class MainActivity extends AppCompatActivity {
         Tool toolForSearch = new Tool();
 
         toolForSearch.setRecordPlayback(recordPlayback.isChecked() ? 1 : 0);
+        toolForSearch.setSupportDesktop(supportDesktop.isChecked() ? 1 : 0);
+        toolForSearch.setSupportWebServices(supportWebServices.isChecked() ? 1 : 0);
+        toolForSearch.setSupportWeb(supportWeb.isChecked() ? 1 : 0);
+        toolForSearch.setSupportMobile(supportMobile.isChecked() ? 1 : 0);
 
         //set labels visible
         resultCaption.setVisibility(View.VISIBLE);
         resultValue.setVisibility(View.VISIBLE);
 
-        Tool returnedTool = mDBHelper.selectTool(toolForSearch);
-        if(returnedTool != null){
-            resultValue.setText(returnedTool.getName());
+        StringBuilder tools = new StringBuilder();
+
+        List<Tool> returnedTool = mDBHelper.selectTools(toolForSearch);
+        if(returnedTool.size() != 0){
+            for (Tool tool:returnedTool
+                 ) {
+                tools.append(tool.getName() + ", ");
+            }
+            resultValue.setText(tools.toString().replace(",","\n"));
         }
         else{
             resultValue.setText("Can't find any tool matching your request");
@@ -121,11 +181,11 @@ public class MainActivity extends AppCompatActivity {
         //mDBHelper.closeDB();
     }
 
-    public void deleteDB(View view){
+    public void clearDB(View view){
         mDBHelper.recreateTable();
     }
 
-    public void createDB(View view){
+    public void fillDB(View view){
         fillDBData();
     }
 

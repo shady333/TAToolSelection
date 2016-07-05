@@ -34,14 +34,14 @@
                             android:layout_height="wrap_content"
                             android:text="Create"
                             android:id="@+id/b_create"
-                            android:onClick="createDB" />
+                            android:onClick="fillDB" />
 
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Delete"
                             android:id="@+id/b_delete"
-                            android:onClick="deleteDB" />
+                            android:onClick="clearDB" />
 
                         <Button
                             android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Large Text"
+                            android:text="Results"
                             android:id="@+id/tv_resultCaption" />
                     </TableRow>
 
@@ -187,8 +187,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Medium Text"
+                            android:text="Medium Text ///n sadasd"
                             android:id="@+id/tv_resultValue" />
+
                     </TableRow>
                 </TableLayout>
             </TableRow>
