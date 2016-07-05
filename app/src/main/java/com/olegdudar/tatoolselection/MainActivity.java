@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setPrice(0);
         tool.setRecordPlayback(1);
         tool.setSupportDesktop(0);
-        tool.setSupportMobile(1);
-        tool.setSupportWeb(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
         tool.setSupportWebServices(0);
         mDBHelper.addTool(tool);
 
