@@ -135,6 +135,40 @@
                             android:text="For WebServices"
                             android:id="@+id/cb_webservices" />
                     </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Documentation available"
+                            android:id="@+id/cb_documentation" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CI integration"
+                            android:id="@+id/cb_cisupport" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reports generation"
+                            android:id="@+id/cb_reports" />
+                    </TableRow>
+
                 </TableLayout>
             </TableRow>
 

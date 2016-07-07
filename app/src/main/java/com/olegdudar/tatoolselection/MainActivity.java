@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox supportWebServices;
     private CheckBox supportDesktop;
 
+    private CheckBox supportDocumentation;
+    private CheckBox supportCI;
+    private CheckBox supportReports;
+
     private TextView resultCaption;
     private TextView resultValue;
 
@@ -38,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         supportMobile = (CheckBox)findViewById(R.id.cb_mobile);
         supportWeb = (CheckBox)findViewById(R.id.cb_web);
         supportWebServices = (CheckBox)findViewById(R.id.cb_webservices);
+
+        supportDocumentation = (CheckBox)findViewById(R.id.cb_documentation);
+        supportCI = (CheckBox)findViewById(R.id.cb_cisupport);
+        supportReports = (CheckBox)findViewById(R.id.cb_reports);
 
         resultCaption = (TextView)findViewById(R.id.tv_resultCaption);
         resultValue = (TextView)findViewById(R.id.tv_resultValue);
@@ -80,16 +88,49 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportMobile(1);
         tool.setSupportWeb(1);
         tool.setSupportWebServices(1);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
         mDBHelper.addTool(tool);
 
-        tool.setName("Appium");
-        tool.setVendor("Appium");
-        tool.setPrice(0);
-        tool.setRecordPlayback(0);
+        tool.setName("QTP");
+        tool.setVendor("HP");
+        tool.setPrice(1000);
+        tool.setRecordPlayback(1);
         tool.setSupportDesktop(0);
-        tool.setSupportMobile(1);
-        tool.setSupportWeb(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
         tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Jmeter");
+        tool.setVendor("Jmeter");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(1);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        mDBHelper.addTool(tool);
+
+
+        tool.setName("Selenium -RC");
+        tool.setVendor("Selenium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
         mDBHelper.addTool(tool);
 
         tool.setName("Selenium WebDriver");
@@ -100,26 +141,113 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportMobile(0);
         tool.setSupportWeb(1);
         tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
         mDBHelper.addTool(tool);
 
-        tool.setName("Selenium IDE");
-        tool.setVendor("Selenium");
+        tool.setName("AutoIT");
+        tool.setVendor("AutoIT");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        mDBHelper.addTool(tool);
+
+        tool.setName("SoupUI");
+        tool.setVendor("SoupUI");
         tool.setPrice(0);
         tool.setRecordPlayback(1);
         tool.setSupportDesktop(0);
         tool.setSupportMobile(0);
-        tool.setSupportWeb(1);
-        tool.setSupportWebServices(0);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(1);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
         mDBHelper.addTool(tool);
 
-        tool.setName("Ranorex");
-        tool.setVendor("Ranorex");
+        tool.setName("Coded UI");
+        tool.setVendor("Microsoft");
         tool.setPrice(1000);
         tool.setRecordPlayback(1);
         tool.setSupportDesktop(1);
-        tool.setSupportMobile(1);
+        tool.setSupportMobile(0);
         tool.setSupportWeb(1);
-        tool.setSupportWebServices(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Robotium");
+        tool.setVendor("Robotium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        mDBHelper.addTool(tool);
+
+        tool.setName("UI Automator");
+        tool.setVendor("UI Automator");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Espresso");
+        tool.setVendor("Espresso");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Appium");
+        tool.setVendor("Appium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        mDBHelper.addTool(tool);
+
+        tool.setName("Calabash");
+        tool.setVendor("Calabash");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
         mDBHelper.addTool(tool);
     }
 
@@ -157,6 +285,10 @@ public class MainActivity extends AppCompatActivity {
         toolForSearch.setSupportWebServices(supportWebServices.isChecked() ? 1 : 0);
         toolForSearch.setSupportWeb(supportWeb.isChecked() ? 1 : 0);
         toolForSearch.setSupportMobile(supportMobile.isChecked() ? 1 : 0);
+
+        toolForSearch.setDocumentation(supportDocumentation.isChecked() ? 1 : 0);
+        toolForSearch.setSupportCI(supportCI.isChecked() ? 1 : 0);
+        toolForSearch.setReports(supportReports.isChecked() ? 1 : 0);
 
         //set labels visible
         resultCaption.setVisibility(View.VISIBLE);

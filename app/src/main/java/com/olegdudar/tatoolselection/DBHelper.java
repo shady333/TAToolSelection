@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String LOG = "DatabaseHelper";
 
     private static final String DATABASE_NAME = "tatools";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TOOLS_TABLE = "tools";
     private static final String TOOL_NAME_COLUMN = "tool_name";
@@ -32,6 +32,9 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String SUPPORT_MOBILE_COLUMN = "tool_support_mobile";
     private static final String SUPPORT_DESKTOP_COLUMN = "tool_support_desktop";
     private static final String SUPPORT_WEBSERVICES_COLUMN = "tool_support_webservices";
+    private static final String SUPPORT_CI = "tool_support_ci";
+    private static final String SUPPORT_DOCUMENTATION = "tool_documentation";
+    private static final String SUPPORT_REPORTS = "tool_support_reports";
     private static final String ADDED_DATE = "tool_added_date";
 
     private static final String CREATE_TOOLS_TABLE = "CREATE TABLE "
@@ -45,6 +48,11 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             + SUPPORT_MOBILE_COLUMN + " INTEGER, "
             + SUPPORT_DESKTOP_COLUMN + " INTEGER, "
             + SUPPORT_WEBSERVICES_COLUMN + " INTEGER, "
+
+            + SUPPORT_CI + " INTEGER, "
+            + SUPPORT_DOCUMENTATION + " INTEGER, "
+            + SUPPORT_REPORTS + " INTEGER, "
+
             + ADDED_DATE + " DATETIME, "
 
             + PRICE_COLUMN + " DOUBLE);";
@@ -115,45 +123,12 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         values.put(ADDED_DATE, getDateTime());
         values.put(VENDOR_COLUMN, tool.getVendor());
 
+        values.put(SUPPORT_CI, tool.getSupportCI());
+        values.put(SUPPORT_DOCUMENTATION, tool.getDocumentation());
+        values.put(SUPPORT_REPORTS, tool.getReports());
+
         db.insert(TOOLS_TABLE, null, values);
 
-    }
-
-    public Tool selectFirstTool(Tool tool){
-
-        Tool tool1 = null;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String selectQuery = "SELECT * FROM " + TOOLS_TABLE + " WHERE "
-//                + PRICE_COLUMN + " = " + tool.getPrice()
-//                + " AND "
-                + RECORDPLAYBACK_COLUMN + " = " + tool.getRecordPlayback()
-//                + " AND "
-//                + SUPPORT_DESKTOP_COLUMN + " = " + tool.getSupportDesktop()
-//                + " AND "
-//                + SUPPORT_MOBILE_COLUMN + " = " + tool.getSupportMobile()
-//                + " AND "
-//                + SUPPORT_WEB_COLUMN + " = " + tool.getSupportWeb()
-//                + " AND "
-//                + SUPPORT_WEBSERVICES_COLUMN + " = " + tool.getSupportWebServices()
-                + ";";
-
-        Log.e(LOG, selectQuery);
-
-        Cursor c = db.rawQuery(selectQuery, null);
-
-        if (c != null && c.getCount() > 0) {
-            c.moveToFirst();
-
-            tool1 = new Tool();
-
-            tool1.setName(c.getString(c.getColumnIndex(TOOL_NAME_COLUMN)));
-            tool1.setPrice(c.getFloat(c.getColumnIndex(PRICE_COLUMN)));
-
-            c.close();
-        }
-        return tool1;
     }
 
     public List<Tool> selectTools(Tool tool){
@@ -174,6 +149,16 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
                 + SUPPORT_WEB_COLUMN + " IN " + (tool.getSupportWeb() == 1 ? "(1)" : "(0,1)")
                 + " AND "
                 + SUPPORT_WEBSERVICES_COLUMN + " IN " + (tool.getSupportWebServices() == 1 ? "(1)" : "(0,1)")
+
+                + " AND "
+                + SUPPORT_DOCUMENTATION + " IN " + (tool.getDocumentation() == 1 ? "(1)" : "(0,1)")
+
+                + " AND "
+                + SUPPORT_REPORTS + " IN " + (tool.getReports() == 1 ? "(1)" : "(0,1)")
+
+                + " AND "
+                + SUPPORT_CI + " IN " + (tool.getSupportCI() == 1 ? "(1)" : "(0,1)")
+
                 + ";";
 
 //        StringBuilder request = new StringBuilder();

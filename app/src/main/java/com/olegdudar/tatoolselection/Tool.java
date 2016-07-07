@@ -13,12 +13,22 @@ public class Tool {
     int supportMobile;
     int supportWebServices;
 
+
+
+    int supportCI;
+    int reports;
+    int documentation;
+
+
     Tool(){
         this.recordPlayback = 0;
         this.supportDesktop = 0;
         this.supportMobile = 0;
         this.supportWeb = 0;
         this.supportWebServices = 0;
+        this.supportCI = 0;
+        this.reports = 0;
+        this.documentation = 0;
     }
 
     public Tool(String name, String vendor, float price){
@@ -30,6 +40,33 @@ public class Tool {
         this.supportMobile = 0;
         this.supportWeb = 0;
         this.supportWebServices = 0;
+        this.supportCI = 0;
+        this.reports = 0;
+        this.documentation = 0;
+    }
+
+    public int getSupportCI() {
+        return supportCI;
+    }
+
+    public void setSupportCI(int supportCI) {
+        this.supportCI = supportCI;
+    }
+
+    public int getReports() {
+        return reports;
+    }
+
+    public void setReports(int reports) {
+        this.reports = reports;
+    }
+
+    public int getDocumentation() {
+        return documentation;
+    }
+
+    public void setDocumentation(int documentation) {
+        this.documentation = documentation;
     }
 
     //setters
