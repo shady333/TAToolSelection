@@ -61,36 +61,6 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-//    public DBHelper(Context context) {
-//        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//    }
-
-//    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
-//                          int version) {
-//        super(context, name, factory, version);
-//    }
-
-//    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
-//                          int version, DatabaseErrorHandler errorHandler) {
-//        super(context, name, factory, version, errorHandler);
-//    }
-
-//    @Override
-//    public void onCreate(SQLiteDatabase db) {
-//        db.execSQL(CREATE_TOOLS_TABLE);
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        // write to journal
-//        Log.w("SQLite", "Updating from version " + oldVersion + " to version " + newVersion);
-//
-//        // remove old table and create new one
-//        db.execSQL("DROP TABLE IF IT EXISTS " + TOOLS_TABLE);
-//        // create new table
-//        onCreate(db);
-//    }
-//
     public void recreateTable(){
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DELETE FROM " + TOOLS_TABLE);

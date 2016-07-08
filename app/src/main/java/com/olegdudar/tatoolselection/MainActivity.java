@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button createDB;
     private Button deleteDB;
+
+    TableLayout resultsLayout;
 
 
     @Override
@@ -57,23 +61,22 @@ public class MainActivity extends AppCompatActivity {
         resultCaption.setVisibility(View.INVISIBLE);
         resultValue.setVisibility(View.INVISIBLE);
 
+        resultsLayout = (TableLayout)findViewById(R.id.resulTableLayout);
+
         mDBHelper = new DBHelper(getApplicationContext());
 
-        //fillDBData();
 
 
+    }
 
-//        mDBHelper = new DBHelper(this, "mydatabase.db", null, 1);
-//        mSQLiteDatabase = mDBHelper.getWritableDatabase();
+    public void test(View view){
+        Button btnNew = new Button(this);
+        btnNew.setText("TEST BUTTON");
+        resultsLayout.addView(btnNew);
 
-//        ContentValues values = new ContentValues();
-        //create values for each columns
-//        values.put(DBHelper.TOOL_NAME_COLUMN, "TestComplete");
-//        values.put(DBHelper.VENDOR_COLUMN, "Smart Bear");
-//        values.put(DBHelper.PRICE_COLUMN, 1000.00d);
-        //insert values into db
-//        mSQLiteDatabase.insert("tools", null, values);
-
+        ImageView image = new ImageView(this);
+        image.setImageDrawable(getResources().getDrawable(R.drawable.appium));
+        resultsLayout.addView(image);
     }
 
     private void fillDBData() {
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         mDBHelper.addTool(tool);
 
         tool.setName("Jmeter");
-        tool.setVendor("Jmeter");
+        tool.setVendor("Apache");
         tool.setPrice(0);
         tool.setRecordPlayback(1);
         tool.setSupportDesktop(0);
@@ -159,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setReports(0);
         mDBHelper.addTool(tool);
 
-        tool.setName("SoupUI");
-        tool.setVendor("SoupUI");
+        tool.setName("SoapUI");
+        tool.setVendor("SmartBear");
         tool.setPrice(0);
         tool.setRecordPlayback(1);
         tool.setSupportDesktop(0);
@@ -198,8 +201,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setReports(0);
         mDBHelper.addTool(tool);
 
-        tool.setName("UI Automator");
-        tool.setVendor("UI Automator");
+        tool.setName("UIAutomator");
+        tool.setVendor("UIAutomator");
         tool.setPrice(0);
         tool.setRecordPlayback(0);
         tool.setSupportDesktop(0);
@@ -251,32 +254,6 @@ public class MainActivity extends AppCompatActivity {
         mDBHelper.addTool(tool);
     }
 
-//    public void recreateDB(View view){
-//        mDBHelper = new DBHelper(this, "mydatabase.db", null, 1);
-//        SQLiteDatabase sdb;
-//        sdb = mDBHelper.getReadableDatabase();
-//    }
-
-    public void readDataFromDB(View view){
-//        Cursor cursor = mSQLiteDatabase.query("tools", new String[]{DBHelper.TOOL_NAME_COLUMN,
-//                        DBHelper.VENDOR_COLUMN, DBHelper.PRICE_COLUMN},
-//                null, null,
-//                null, null, null) ;
-//
-//        cursor.moveToFirst();
-//
-//        String toolName = cursor.getString(cursor.getColumnIndex(DBHelper.TOOL_NAME_COLUMN));
-//        String toolVendor = cursor.getString(cursor.getColumnIndex(DBHelper.VENDOR_COLUMN));
-//        float toolPrice = cursor.getFloat(cursor.getColumnIndex(DBHelper.PRICE_COLUMN));
-//
-//        TextView infoTextView = (TextView)findViewById(R.id.results);
-//        infoTextView.setText("Tool " + toolName + " from " + toolVendor + " with " +
-//                toolPrice + " price");
-//
-//        // не забываем закрывать курсор
-//        cursor.close();
-    }
-
     public void search(View view){
         Tool toolForSearch = new Tool();
 
@@ -308,9 +285,7 @@ public class MainActivity extends AppCompatActivity {
             resultValue.setText("Can't find any tool matching your request");
         }
 
-
-
-        //mDBHelper.closeDB();
+//        mDBHelper.closeDB();
     }
 
     public void clearDB(View view){
