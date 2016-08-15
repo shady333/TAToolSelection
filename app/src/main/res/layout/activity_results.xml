@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.olegdudar.tatoolselection.ResultsActivity"
+    android:id="@+id/resultsLayout">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/itemsLayout">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back filter"
+                    android:id="@+id/button2"
+                    android:onClick="add_Item" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView"
+                        android:src="@android:drawable/btn_star_big_on" />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dflkdsja dfj dslfjdsf dksjhfdsahfk d dskdsfkj dshf kdsjjhfhdsk dsk fksdfh sdlkjfhakehe wkjhh dshhf  fksdfhdskfhskdjhdkasfhksdj hfkjd sad вавыдлоыв овы ыдвлоадлывоадлывоадл фв ыф ыва ыва ыва ыва выа ds sdfsdfsd fsd fsdf sdfsd fs"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+
+            </TableRow>
+
+
+        </TableLayout>
+    </ScrollView>
+</RelativeLayout>

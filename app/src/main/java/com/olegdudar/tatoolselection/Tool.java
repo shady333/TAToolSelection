@@ -1,11 +1,16 @@
 package com.olegdudar.tatoolselection;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tool {
+public class Tool{
     String name;
     String vendor;
+    String description;
+    int id;
     int recordPlayback;
     float price;
     int supportWeb;
@@ -21,33 +26,35 @@ public class Tool {
 
 
     Tool(){
-        this.recordPlayback = 0;
-        this.supportDesktop = 0;
-        this.supportMobile = 0;
-        this.supportWeb = 0;
-        this.supportWebServices = 0;
-        this.supportCI = 0;
-        this.reports = 0;
-        this.documentation = 0;
-    }
+        }
 
     public Tool(String name, String vendor, float price){
         this.name = name;
         this.vendor = vendor;
         this.price = price;
-        this.recordPlayback = 0;
-        this.supportDesktop = 0;
-        this.supportMobile = 0;
-        this.supportWeb = 0;
-        this.supportWebServices = 0;
-        this.supportCI = 0;
-        this.reports = 0;
-        this.documentation = 0;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
     }
 
     public int getSupportCI() {
         return supportCI;
     }
+
+
 
     public void setSupportCI(int supportCI) {
         this.supportCI = supportCI;
@@ -134,6 +141,5 @@ public class Tool {
     public int getSupportWebServices(){
         return this.supportWebServices;
     }
-
 
 }

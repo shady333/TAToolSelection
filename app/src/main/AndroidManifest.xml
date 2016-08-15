@@ -18,7 +18,8 @@
         <activity android:name=".AppTypeSelectionActivity" />
         <activity android:name=".WebApplicationActivity" />
         <activity android:name=".DesktopApplicationActivity" />
-        <activity android:name=".ServiceActivity"></activity>
+        <activity android:name=".ServiceActivity" />
+        <activity android:name=".ResultsActivity"></activity>
     </application>
 
 </manifest>

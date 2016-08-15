@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:text="Search"
                     android:id="@+id/button"
-                    android:onClick="search" />
+                    android:onClick="searchIds" />
             </TableRow>
 
             <TableRow

@@ -1,8 +1,11 @@
 package com.olegdudar.tatoolselection;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,13 +74,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test(View view){
+        /*getting screen size*/
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+
         Button btnNew = new Button(this);
         btnNew.setText("TEST BUTTON");
-        resultsLayout.addView(btnNew);
 
         ImageView image = new ImageView(this);
         image.setImageDrawable(getResources().getDrawable(R.drawable.appium));
-        resultsLayout.addView(image);
+
+        TableLayout tableLayout = new TableLayout(this);
+        resultsLayout.addView(tableLayout, new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.FILL_PARENT, 1.0f
+        ));
+
+
+
+        TextView textView = new TextView(this);
+        textView.setText("asdasjdhaskj asdjh jdksaj fdsjhfd sfdskjf fhkgfkdshgjhg k dskds jhfksdjfsdk dkjfh dsjk fhsd fsdkfh sdkjf h");
+
+        tableLayout.addView(image);
+        tableLayout.addView(textView);
     }
 
     private void fillDBData() {
@@ -94,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(1);
+        tool.setDescription("Test Complete");
         mDBHelper.addTool(tool);
 
         tool.setName("QTP");
@@ -107,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(2);
+        tool.setDescription("QTP");
         mDBHelper.addTool(tool);
 
         tool.setName("Jmeter");
@@ -120,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(3);
+        tool.setDescription("Jmeter");
         mDBHelper.addTool(tool);
 
 
@@ -134,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(0);
+        tool.setId(4);
+        tool.setDescription("Selenium -RC");
         mDBHelper.addTool(tool);
 
         tool.setName("Selenium WebDriver");
@@ -147,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(0);
+        tool.setId(5);
+        tool.setDescription("Selenium WebDriver");
         mDBHelper.addTool(tool);
 
         tool.setName("AutoIT");
@@ -160,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(0);
+        tool.setId(6);
+        tool.setDescription("AutoIT");
         mDBHelper.addTool(tool);
 
         tool.setName("SoapUI");
@@ -173,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(7);
+        tool.setDescription("SoapUI");
         mDBHelper.addTool(tool);
 
         tool.setName("Coded UI");
@@ -186,6 +224,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(8);
+        tool.setDescription("Coded UI");
         mDBHelper.addTool(tool);
 
         tool.setName("Robotium");
@@ -199,6 +239,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(0);
+        tool.setId(9);
+        tool.setDescription("Robotium");
         mDBHelper.addTool(tool);
 
         tool.setName("UIAutomator");
@@ -212,6 +254,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(10);
+        tool.setDescription("UIAutomator");
         mDBHelper.addTool(tool);
 
         tool.setName("Espresso");
@@ -225,6 +269,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(0);
+        tool.setId(11);
+        tool.setDescription("Espresso");
         mDBHelper.addTool(tool);
 
         tool.setName("Appium");
@@ -238,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(1);
+        tool.setId(12);
+        tool.setDescription("Appium");
         mDBHelper.addTool(tool);
 
         tool.setName("Calabash");
@@ -251,10 +299,73 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportCI(1);
         tool.setDocumentation(1);
         tool.setReports(0);
+        tool.setId(13);
+        tool.setDescription("Calabash");
         mDBHelper.addTool(tool);
     }
 
+    public void switchToResults(View view){
+        Intent intent = new Intent(this, ResultsActivity.class);
+
+        startActivity(intent);
+    }
+
     public void search(View view){
+        Tool toolForSearch = new Tool();
+
+        toolForSearch = generateToolForSearch();
+
+        //set labels visible
+        resultCaption.setVisibility(View.VISIBLE);
+        resultValue.setVisibility(View.VISIBLE);
+
+        StringBuilder tools = new StringBuilder();
+
+        List<Tool> returnedTool = mDBHelper.selectTools(toolForSearch);
+        if(returnedTool.size() != 0){
+            for (Tool tool:returnedTool
+                    ) {
+                tools.append(tool.getName() + ", ");
+            }
+            resultValue.setText(tools.toString().replace(",","\n"));
+        }
+        else{
+            resultValue.setText("Can't find any tool matching your request");
+        }
+
+//        mDBHelper.closeDB();
+    }
+
+    public void searchIds(View view){
+        Tool toolForSearch = new Tool();
+
+        toolForSearch = generateToolForSearch();
+
+        //set labels visible
+        resultCaption.setVisibility(View.VISIBLE);
+        resultValue.setVisibility(View.VISIBLE);
+
+        StringBuilder tools = new StringBuilder();
+
+        List<Integer> returnedTool = mDBHelper.selectToolIds(toolForSearch);
+        if(returnedTool.size() != 0){
+            Intent intent = new Intent(this, ResultsActivity.class);
+
+            intent.putIntegerArrayListExtra("results", (ArrayList<Integer>) returnedTool);
+
+            startActivity(intent);
+        }
+        else{
+            resultValue.setText("Can't find any tool matching your request");
+        }
+
+//        mDBHelper.closeDB();
+
+
+    }
+
+    private Tool generateToolForSearch() {
+
         Tool toolForSearch = new Tool();
 
         toolForSearch.setRecordPlayback(recordPlayback.isChecked() ? 1 : 0);
@@ -267,25 +378,7 @@ public class MainActivity extends AppCompatActivity {
         toolForSearch.setSupportCI(supportCI.isChecked() ? 1 : 0);
         toolForSearch.setReports(supportReports.isChecked() ? 1 : 0);
 
-        //set labels visible
-        resultCaption.setVisibility(View.VISIBLE);
-        resultValue.setVisibility(View.VISIBLE);
-
-        StringBuilder tools = new StringBuilder();
-
-        List<Tool> returnedTool = mDBHelper.selectTools(toolForSearch);
-        if(returnedTool.size() != 0){
-            for (Tool tool:returnedTool
-                 ) {
-                tools.append(tool.getName() + ", ");
-            }
-            resultValue.setText(tools.toString().replace(",","\n"));
-        }
-        else{
-            resultValue.setText("Can't find any tool matching your request");
-        }
-
-//        mDBHelper.closeDB();
+        return toolForSearch;
     }
 
     public void clearDB(View view){

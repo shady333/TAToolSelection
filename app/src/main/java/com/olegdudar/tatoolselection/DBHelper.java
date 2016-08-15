@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String LOG = "DatabaseHelper";
 
     private static final String DATABASE_NAME = "tatools";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private static final String TOOLS_TABLE = "tools";
     private static final String TOOL_NAME_COLUMN = "tool_name";
@@ -36,12 +36,17 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String SUPPORT_DOCUMENTATION = "tool_documentation";
     private static final String SUPPORT_REPORTS = "tool_support_reports";
     private static final String ADDED_DATE = "tool_added_date";
+    private static final String TOOL_ID_COLUMN = "tool_id";
+    private static final String TOOL_DESCRIPTION_COLUMN = "tool_description";
+
 
     private static final String CREATE_TOOLS_TABLE = "CREATE TABLE "
             + TOOLS_TABLE + " (" + BaseColumns._ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + TOOL_NAME_COLUMN + " TEXT NOT NULL, "
             + VENDOR_COLUMN + " TEXT, "
+
+            + TOOL_DESCRIPTION_COLUMN + " TEXT, "
 
             + RECORDPLAYBACK_COLUMN + " INTEGER, "
             + SUPPORT_WEB_COLUMN + " INTEGER, "
@@ -52,6 +57,8 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             + SUPPORT_CI + " INTEGER, "
             + SUPPORT_DOCUMENTATION + " INTEGER, "
             + SUPPORT_REPORTS + " INTEGER, "
+
+            + TOOL_ID_COLUMN + " INTEGER, "
 
             + ADDED_DATE + " DATETIME, "
 
@@ -96,6 +103,10 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         values.put(SUPPORT_CI, tool.getSupportCI());
         values.put(SUPPORT_DOCUMENTATION, tool.getDocumentation());
         values.put(SUPPORT_REPORTS, tool.getReports());
+
+        values.put(TOOL_ID_COLUMN, tool.getId());
+        values.put(TOOL_DESCRIPTION_COLUMN, tool.getDescription());
+
 
         db.insert(TOOLS_TABLE, null, values);
 
@@ -160,6 +171,123 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             c.close();
         }
         return tools;
+    }
+
+    public List<Integer> selectToolIds(Tool tool){
+
+        List<Integer> toolIds = new ArrayList<Integer>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TOOLS_TABLE + " WHERE "
+//                + PRICE_COLUMN + " = " + tool.getPrice()
+//                + " AND "
+                + RECORDPLAYBACK_COLUMN + " IN " + (tool.getRecordPlayback() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_DESKTOP_COLUMN + " IN " + (tool.getSupportDesktop() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_MOBILE_COLUMN + " IN " + (tool.getSupportMobile() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_WEB_COLUMN + " IN " + (tool.getSupportWeb() == 1 ? "(1)" : "(0,1)")
+                + " AND "
+                + SUPPORT_WEBSERVICES_COLUMN + " IN " + (tool.getSupportWebServices() == 1 ? "(1)" : "(0,1)")
+
+                + " AND "
+                + SUPPORT_DOCUMENTATION + " IN " + (tool.getDocumentation() == 1 ? "(1)" : "(0,1)")
+
+                + " AND "
+                + SUPPORT_REPORTS + " IN " + (tool.getReports() == 1 ? "(1)" : "(0,1)")
+
+                + " AND "
+                + SUPPORT_CI + " IN " + (tool.getSupportCI() == 1 ? "(1)" : "(0,1)")
+
+                + ";";
+
+//        StringBuilder request = new StringBuilder();
+//        request.append("SELECT * FROM " + TOOLS_TABLE + " WHERE ");
+//        if(tool.getRecordPlayback() == 1)
+//            request.append(
+
+        Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        Tool tempTool;
+
+        if (c != null && c.getCount() > 0) {
+
+            // looping through all rows and adding to list
+            if (c.moveToFirst()) {
+                do {
+
+                    toolIds.add(c.getInt(c.getColumnIndex(TOOL_ID_COLUMN)));
+
+                } while (c.moveToNext());
+            }
+
+            c.close();
+        }
+        return toolIds;
+    }
+
+    public String getToolNameById(int id){
+
+        String toolName = "VALUE NOT FOUND";
+
+        List<Integer> toolIds = new ArrayList<Integer>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TOOLS_TABLE + " WHERE "
+//                + PRICE_COLUMN + " = " + tool.getPrice()
+//                + " AND "
+                + TOOL_ID_COLUMN + " IS " + id + ";";
+
+        Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        Tool tempTool;
+
+        if (c != null && c.getCount() > 0) {
+
+            // looping through all rows and adding to list
+            if (c.moveToFirst()) {
+                toolName = c.getString(c.getColumnIndex(TOOL_NAME_COLUMN));
+            }
+
+            c.close();
+        }
+        return toolName;
+    }
+
+    public String getToolDescriptionById(int id){
+
+        String toolDescription = "VALUE NOT FOUND";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TOOLS_TABLE + " WHERE "
+//                + PRICE_COLUMN + " = " + tool.getPrice()
+//                + " AND "
+                + TOOL_ID_COLUMN + " IS " + id + ";";
+
+        Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        Tool tempTool;
+
+        if (c != null && c.getCount() > 0) {
+
+            // looping through all rows and adding to list
+            if (c.moveToFirst()) {
+                toolDescription = c.getString(c.getColumnIndex(TOOL_DESCRIPTION_COLUMN));
+            }
+
+            c.close();
+        }
+        return toolDescription;
     }
 
     // closing database
