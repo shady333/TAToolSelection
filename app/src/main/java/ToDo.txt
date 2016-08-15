@@ -1,0 +1,3 @@
+Disable different orientations
+Add link to official web site
+Add bg image to main screen

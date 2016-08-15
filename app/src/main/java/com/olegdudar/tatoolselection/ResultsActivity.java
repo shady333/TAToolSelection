@@ -48,8 +48,8 @@ public class ResultsActivity extends AppCompatActivity {
 
     public void add_Item(View view){
 
-        addCaption("CAPTION");
-        addDescription("asdlasdlkas dkAKJDASS JDSAFKJ K FGKJFD GHKAJH LKDFH DLDLA LALJDSHF  FSD K 874398573498573498 E JFJDJKF HDSJKF ", 1);
+        //addCaption("CAPTION");
+        //addDescription("asdlasdlkas dkAKJDASS JDSAFKJ K FGKJFD GHKAJH LKDFH DLDLA LALJDSHF  FSD K 874398573498573498 E JFJDJKF HDSJKF ", 1);
     }
 
     private void addDescription(String text, int imageId) {
