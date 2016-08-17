@@ -222,13 +222,27 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
         Tool tempTool;
 
+        boolean marker = false;
+
         if (c != null && c.getCount() > 0) {
 
             // looping through all rows and adding to list
             if (c.moveToFirst()) {
                 do {
-
-                    toolIds.add(c.getInt(c.getColumnIndex(TOOL_ID_COLUMN)));
+                    if(tool.getSupportedLanguages() != null){
+                        for(String lang : tool.getSupportedLanguages()){
+                            if(c.getString(c.getColumnIndex(TOOL_SUPPORTED_LANGUAGES)).contains(lang)){
+                                marker = true;
+                                continue;
+                            }
+                        }
+                    }
+                    else{
+                        marker = true;
+                    }
+                    if(marker)
+                        toolIds.add(c.getInt(c.getColumnIndex(TOOL_ID_COLUMN)));
+                    marker = false;
 
                 } while (c.moveToNext());
             }

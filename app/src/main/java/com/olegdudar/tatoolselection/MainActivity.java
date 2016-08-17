@@ -1,5 +1,6 @@
 package com.olegdudar.tatoolselection;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -164,166 +166,200 @@ public class MainActivity extends AppCompatActivity {
         tool.setDescription("Apache JMeter is an Apache project that can be used as a load testing tool for analyzing and measuring the performance of a variety of services, with a focus on web applications.");
         mDBHelper.addTool(tool);
 
-//
-//        tool.setName("Selenium -RC");
-//        tool.setVendor("Selenium");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(1);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(0);
-//        tool.setSupportWeb(1);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(0);
-//        tool.setId(4);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("C#", "Java", "JavaScript", "Objective-C", "Perl", "PHP", "Python", "Ruby"));
-//        tool.setDescription("Selenium Remote Control (RC) is a test tool that allows you to write automated web application UI tests in any programming language against any HTTP website using any mainstream JavaScript-enabled browser.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("Selenium WebDriver");
-//        tool.setVendor("Selenium");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(0);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(0);
-//        tool.setSupportWeb(1);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(0);
-//        tool.setId(5);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("C#", "Java", "JavaScript", "Objective-C", "Perl", "PHP", "Python", "Ruby"));
-//        tool.setDescription("WebDriver is designed to provide a simpler, more concise programming interface in addition to addressing some limitations in the Selenium-RC API. Selenium-WebDriver was developed to better support dynamic web pages where elements of a page may change without the page itself being reloaded. WebDriver’s goal is to supply a well-designed object-oriented API that provides improved support for modern advanced web-app testing problems.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("AutoIT");
-//        tool.setVendor("AutoIT");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(0);
-//        tool.setSupportDesktop(1);
-//        tool.setSupportMobile(0);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(0);
-//        tool.setId(6);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Own BASIC-like syntax"));
-//        tool.setDescription("AutoIt is a freeware automation language for Microsoft Windows. In its earliest release, the software was primarily intended to create automation scripts (sometimes called macros) for Microsoft Windows programs[3] but has since grown to include enhancements in both programming language design and overall functionality.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("SoapUI");
-//        tool.setVendor("SmartBear");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(1);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(0);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(1);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(1);
-//        tool.setId(7);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Groovy"));
-//        tool.setDescription("SoapUI is an open-source web service testing application for service-oriented architectures (SOA) and representational state transfers (REST). Its functionality covers web service inspection, invoking, development, simulation and mocking, functional testing, load and compliance testing. A commercial version, SoapUI Pro, which mainly focuses on features designed to enhance productivity, was also developed by Eviware software. In 2011, SmartBear Software acquired Eviware.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("Coded UI");
-//        tool.setVendor("Microsoft");
-//        tool.setPrice(1000);
-//        tool.setRecordPlayback(1);
-//        tool.setSupportDesktop(1);
-//        tool.setSupportMobile(0);
-//        tool.setSupportWeb(1);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(1);
-//        tool.setId(8);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("VB Script", "C#"));
-//        tool.setDescription("Automated tests that drive your application through its user interface (UI) are known as coded UI tests (CUITs). These tests include functional testing of the UI controls. They let you verify that the whole application, including its user interface, is functioning correctly. Coded UI Tests are particularly useful where there is validation or other logic in the user interface, for example in a web page. They are also frequently used to automate an existing manual test.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("Robotium");
-//        tool.setVendor("Robotium");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(1);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(1);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(0);
-//        tool.setId(9);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Java"));
-//        tool.setDescription("Robotium is an open-source test framework for writing automatic gray box testing cases for Android applications. With the support of Robotium, test case developers can write function, system and acceptance test scenarios, spanning multiple Android activities. Robotium can be used both for testing applications where the source code is available and applications where only the APK file is available and the implementation details are not known.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("UIAutomator");
-//        tool.setVendor("UIAutomator");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(0);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(1);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(1);
-//        tool.setId(10);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Java"));
-//        tool.setDescription("UI Automator is a UI testing framework suitable for cross-app functional UI testing across system and installed apps.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("Espresso");
-//        tool.setVendor("Espresso");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(0);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(1);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(0);
-//        tool.setId(11);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Java"));
-//        tool.setDescription("The Espresso API encourages test authors to think in terms of what a user might do while interacting with the application - locating UI elements and interacting with them. At the same time, the framework prevents direct access to activities and views of the application because holding on to these objects and operating on them off the UI thread is a major source of test flakiness. Thus, you will not see methods like getView and getCurrentActivity in the Espresso API. You can still safely operate on views by implementing your own ViewActions and ViewAssertions.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("Appium");
-//        tool.setVendor("Appium");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(0);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(1);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(1);
-//        tool.setId(12);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Ruby", "Java"));
-//        tool.setDescription("Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS and Android platforms. Native apps are those written using the iOS or Android SDKs. Mobile web apps are web apps accessed using a mobile browser (Appium supports Safari on iOS and Chrome or the built-in 'Browser' app on Android). Hybrid apps have a wrapper around a \"webview\" -- a native control that enables interaction with web content. Projects like Phonegap, make it easy to build apps using web technologies that are then bundled into a native wrapper, creating a hybrid app.");
-//        mDBHelper.addTool(tool);
-//
-//        tool.setName("Calabash");
-//        tool.setVendor("Calabash");
-//        tool.setPrice(0);
-//        tool.setRecordPlayback(0);
-//        tool.setSupportDesktop(0);
-//        tool.setSupportMobile(1);
-//        tool.setSupportWeb(0);
-//        tool.setSupportWebServices(0);
-//        tool.setSupportCI(1);
-//        tool.setDocumentation(1);
-//        tool.setReports(0);
-//        tool.setId(13);
-//        tool.setSupportedLanguages((ArrayList<String>) Arrays.asList("Ruby"));
-//        tool.setDescription("Calabash is a framework that enables Automated UI Acceptance Tests written in Cucumber to be run on iOS and Android applications. While Calabash integrates tightly with Xamarin.iOS and Xamarin.Android project, it can also be used with iOS and Android projects written in the indigenous languages of Objective-C and Java.");
-//        mDBHelper.addTool(tool);
+
+        tool.setName("Selenium -RC");
+        tool.setVendor("Selenium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        tool.setId(4);
+        asd.clear();
+        asd.add("C#");
+        asd.add("JavaScript");
+        asd.add("Objective-C");
+        asd.add("Perl");
+        asd.add("PHP");
+        asd.add("Python");
+        asd.add("Ruby");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Selenium Remote Control (RC) is a test tool that allows you to write automated web application UI tests in any programming language against any HTTP website using any mainstream JavaScript-enabled browser.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Selenium WebDriver");
+        tool.setVendor("Selenium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        tool.setId(5);
+        asd.clear();
+        asd.add("C#");
+        asd.add("JavaScript");
+        asd.add("Objective-C");
+        asd.add("Perl");
+        asd.add("PHP");
+        asd.add("Python");
+        asd.add("Ruby");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("WebDriver is designed to provide a simpler, more concise programming interface in addition to addressing some limitations in the Selenium-RC API. Selenium-WebDriver was developed to better support dynamic web pages where elements of a page may change without the page itself being reloaded. WebDriver’s goal is to supply a well-designed object-oriented API that provides improved support for modern advanced web-app testing problems.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("AutoIT");
+        tool.setVendor("AutoIT");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        tool.setId(6);
+        asd.clear();
+        asd.add("Own BASIC-like syntax");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("AutoIt is a freeware automation language for Microsoft Windows. In its earliest release, the software was primarily intended to create automation scripts (sometimes called macros) for Microsoft Windows programs[3] but has since grown to include enhancements in both programming language design and overall functionality.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("SoapUI");
+        tool.setVendor("SmartBear");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(1);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        tool.setId(7);
+        asd.clear();
+        asd.add("Groovy");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("SoapUI is an open-source web service testing application for service-oriented architectures (SOA) and representational state transfers (REST). Its functionality covers web service inspection, invoking, development, simulation and mocking, functional testing, load and compliance testing. A commercial version, SoapUI Pro, which mainly focuses on features designed to enhance productivity, was also developed by Eviware software. In 2011, SmartBear Software acquired Eviware.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Coded UI");
+        tool.setVendor("Microsoft");
+        tool.setPrice(1000);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(0);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        tool.setId(8);
+        asd.clear();
+        asd.add("VB Script");
+        asd.add("C#");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Automated tests that drive your application through its user interface (UI) are known as coded UI tests (CUITs). These tests include functional testing of the UI controls. They let you verify that the whole application, including its user interface, is functioning correctly. Coded UI Tests are particularly useful where there is validation or other logic in the user interface, for example in a web page. They are also frequently used to automate an existing manual test.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Robotium");
+        tool.setVendor("Robotium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        tool.setId(9);
+        asd.clear();
+        asd.add("Java");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Robotium is an open-source test framework for writing automatic gray box testing cases for Android applications. With the support of Robotium, test case developers can write function, system and acceptance test scenarios, spanning multiple Android activities. Robotium can be used both for testing applications where the source code is available and applications where only the APK file is available and the implementation details are not known.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("UIAutomator");
+        tool.setVendor("UIAutomator");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        tool.setId(10);
+        asd.clear();
+        asd.add("Java");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("UI Automator is a UI testing framework suitable for cross-app functional UI testing across system and installed apps.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Espresso");
+        tool.setVendor("Espresso");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        tool.setId(11);
+        asd.clear();
+        asd.add("Java");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("The Espresso API encourages test authors to think in terms of what a user might do while interacting with the application - locating UI elements and interacting with them. At the same time, the framework prevents direct access to activities and views of the application because holding on to these objects and operating on them off the UI thread is a major source of test flakiness. Thus, you will not see methods like getView and getCurrentActivity in the Espresso API. You can still safely operate on views by implementing your own ViewActions and ViewAssertions.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Appium");
+        tool.setVendor("Appium");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        tool.setId(12);
+        asd.clear();
+        asd.add("Java");
+        asd.add("Ruby");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS and Android platforms. Native apps are those written using the iOS or Android SDKs. Mobile web apps are web apps accessed using a mobile browser (Appium supports Safari on iOS and Chrome or the built-in 'Browser' app on Android). Hybrid apps have a wrapper around a \"webview\" -- a native control that enables interaction with web content. Projects like Phonegap, make it easy to build apps using web technologies that are then bundled into a native wrapper, creating a hybrid app.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Calabash");
+        tool.setVendor("Calabash");
+        tool.setPrice(0);
+        tool.setRecordPlayback(0);
+        tool.setSupportDesktop(0);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(0);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(0);
+        tool.setId(13);
+        asd.clear();
+        asd.add("Ruby");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Calabash is a framework that enables Automated UI Acceptance Tests written in Cucumber to be run on iOS and Android applications. While Calabash integrates tightly with Xamarin.iOS and Xamarin.Android project, it can also be used with iOS and Android projects written in the indigenous languages of Objective-C and Java.");
+        mDBHelper.addTool(tool);
     }
 
     public void searchIds(View view){
@@ -336,6 +372,17 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder tools = new StringBuilder();
 
         List<Integer> returnedTool = mDBHelper.selectToolIds(toolForSearch);
+
+        if(supportLanguages.isChecked() && getSelectedItems().isEmpty()){
+            Context context = getApplicationContext();
+            CharSequence text = "Please select at least one programming language";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
+
         if(returnedTool.size() != 0){
             resultCaption.setVisibility(View.INVISIBLE);
             resultValue.setVisibility(View.INVISIBLE);
@@ -348,10 +395,17 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             //set labels visible
-            resultCaption.setVisibility(View.VISIBLE);
-            resultValue.setVisibility(View.VISIBLE);
+//            resultCaption.setVisibility(View.VISIBLE);
+//            resultValue.setVisibility(View.VISIBLE);
+//
+//            resultValue.setText("Can't find any tool matching your request");
 
-            resultValue.setText("Can't find any tool matching your request");
+            Context context = getApplicationContext();
+            CharSequence text = "Can't find any tool matching your request";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
 
 //        mDBHelper.closeDB();
@@ -373,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
         toolForSearch.setSupportCI(supportCI.isChecked() ? 1 : 0);
         toolForSearch.setReports(supportReports.isChecked() ? 1 : 0);
         if(supportLanguages.isChecked()) {
-            toolForSearch.setSupportedLanguages(null);
+            toolForSearch.setSupportedLanguages(getSelectedItems());
         }
         else{
             toolForSearch.setSupportedLanguages(null);
@@ -381,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
         return toolForSearch;
     }
 
-    public ArrayList<String> getSelectedItems(View view) {
+    public ArrayList<String> getSelectedItems() {
         SparseBooleanArray checked = listView.getCheckedItemPositions();
         ArrayList<String> selectedItems = new ArrayList<String>();
         for (int i = 0; i < checked.size(); i++) {
