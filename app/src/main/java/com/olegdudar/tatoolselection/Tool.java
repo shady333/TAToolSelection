@@ -17,6 +17,7 @@ public class Tool{
     int supportDesktop;
     int supportMobile;
     int supportWebServices;
+    ArrayList<String> supportedLanguages;
 
 
 
@@ -24,14 +25,15 @@ public class Tool{
     int reports;
     int documentation;
 
-
     Tool(){
+        this.supportedLanguages = new ArrayList<>();
         }
 
     public Tool(String name, String vendor, float price){
         this.name = name;
         this.vendor = vendor;
         this.price = price;
+        this.supportedLanguages = new ArrayList<>();
     }
 
     public int getId(){
@@ -109,6 +111,10 @@ public class Tool{
         this.supportWebServices = supportWebServices;
     }
 
+    public void setSupportedLanguages(ArrayList<String> languages) {
+        this.supportedLanguages = languages;
+    }
+
     //getters
     public String getName(){
         return this.name;
@@ -142,4 +148,7 @@ public class Tool{
         return this.supportWebServices;
     }
 
+    public ArrayList<String> getSupportedLanguages() {
+        return this.supportedLanguages;
+    }
 }

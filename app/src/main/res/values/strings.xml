@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">TAToolSelection</string>
+    <string-array name="languages_array">
+        <item>Any</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>Ruby</item>
+        <item>C#</item>
+        <item>Python</item>
+        <item>VBScript</item>
+        <item>DelphiScript</item>
+        <item>C++Script</item>
+        <item>C#Scrip</item>
+        <item>Perl</item>
+        <item>PHP</item>
+        <item>Groovy</item>
+
+    </string-array>
 </resources>

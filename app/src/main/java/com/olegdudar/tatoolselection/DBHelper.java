@@ -7,6 +7,7 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -39,6 +40,8 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String TOOL_ID_COLUMN = "tool_id";
     private static final String TOOL_DESCRIPTION_COLUMN = "tool_description";
 
+    private static final String TOOL_SUPPORTED_LANGUAGES = "tool_supported_languages";
+
 
     private static final String CREATE_TOOLS_TABLE = "CREATE TABLE "
             + TOOLS_TABLE + " (" + BaseColumns._ID
@@ -59,6 +62,8 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             + SUPPORT_REPORTS + " INTEGER, "
 
             + TOOL_ID_COLUMN + " INTEGER, "
+
+            + TOOL_SUPPORTED_LANGUAGES + " TEXT, "
 
             + ADDED_DATE + " DATETIME, "
 
@@ -107,6 +112,9 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         values.put(TOOL_ID_COLUMN, tool.getId());
         values.put(TOOL_DESCRIPTION_COLUMN, tool.getDescription());
 
+        values.put(TOOL_SUPPORTED_LANGUAGES, TextUtils.join(";", tool.getSupportedLanguages()));
+
+
 
         db.insert(TOOLS_TABLE, null, values);
 
@@ -114,7 +122,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     public List<Tool> selectTools(Tool tool){
 
-        List<Tool> tools = new ArrayList<Tool>();
+        List<Tool> tools = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
