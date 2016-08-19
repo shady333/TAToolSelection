@@ -19,7 +19,7 @@ public class Tool{
     int supportWebServices;
     ArrayList<String> supportedLanguages;
 
-
+    String webLink;
 
     int supportCI;
     int reports;
@@ -115,6 +115,10 @@ public class Tool{
         this.supportedLanguages = languages;
     }
 
+    public void setWebLink(String webLink){
+        this.webLink = webLink;
+    }
+
     //getters
     public String getName(){
         return this.name;
@@ -150,5 +154,9 @@ public class Tool{
 
     public ArrayList<String> getSupportedLanguages() {
         return this.supportedLanguages;
+    }
+
+    public String getWebLink(){
+        return this.webLink;
     }
 }

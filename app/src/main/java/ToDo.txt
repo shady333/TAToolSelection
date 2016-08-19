@@ -1,5 +1,6 @@
-Disable different orientations
+Disable different orientations - DONE
 Add link to official web site
 Add bg image to main screen
 OOP language selection - DONE
 Issue with view of language selection scroll view (currently value is hardcoded). Solution: fix scrollview or add toas for language selection.
+Add more tools

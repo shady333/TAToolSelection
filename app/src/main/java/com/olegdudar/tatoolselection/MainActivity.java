@@ -52,6 +52,29 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ArrayAdapter<String> adapter;
 
+    public enum CI {
+
+        Jenkins {
+            @Override
+            public String toString() {
+                return "Jenkins";
+            }
+        },
+        TeamCity {
+            @Override
+            public String toString() {
+                return "TeamCity";
+            }
+        },
+        Bamboo {
+            @Override
+            public String toString() {
+                return "Bamboo";
+            }
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -360,6 +383,47 @@ public class MainActivity extends AppCompatActivity {
         tool.setSupportedLanguages(asd);
         tool.setDescription("Calabash is a framework that enables Automated UI Acceptance Tests written in Cucumber to be run on iOS and Android applications. While Calabash integrates tightly with Xamarin.iOS and Xamarin.Android project, it can also be used with iOS and Android projects written in the indigenous languages of Objective-C and Java.");
         mDBHelper.addTool(tool);
+
+        tool.setName("Test Studio Telerik");
+        tool.setVendor("Telerik");
+        tool.setPrice(1000);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        tool.setId(14);
+        asd.clear();
+        asd.add("C#");
+        asd.add("VB.NET");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Test Studio is an innovative and easy-to-use automated web, WPF and load testing solution. Test Studio tests support essential technologies like ASP.NET AJAX, Silverlight, PHP and MVC.");
+        mDBHelper.addTool(tool);
+
+        tool.setName("Silk Test");
+        tool.setVendor("Borland");
+        tool.setPrice(1000);
+        tool.setRecordPlayback(1);
+        tool.setSupportDesktop(1);
+        tool.setSupportMobile(1);
+        tool.setSupportWeb(1);
+        tool.setSupportWebServices(0);
+        tool.setSupportCI(1);
+        tool.setDocumentation(1);
+        tool.setReports(1);
+        tool.setId(15);
+        asd.clear();
+        asd.add("C#");
+        asd.add("VB.NET");
+        tool.setSupportedLanguages(asd);
+        tool.setDescription("Silk Test™ is a reliable, efficient test automation solution for functional testing and regression testing of enterprise software applications. Automated tests can be created without coding, which enables software testers to keep up with the pace of development, and developers to create tests in their choice of IDE.");
+        mDBHelper.addTool(tool);
+
+
+
     }
 
     public void searchIds(View view){

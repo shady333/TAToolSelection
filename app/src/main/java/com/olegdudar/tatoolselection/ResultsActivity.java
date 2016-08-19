@@ -125,9 +125,9 @@ public class ResultsActivity extends AppCompatActivity {
             case 11: return getResources().getDrawable(R.drawable.espresso);
             case 12: return getResources().getDrawable(R.drawable.appium);
             case 13: return getResources().getDrawable(R.drawable.calabash);
-            default:
-                break;
+            case 14: return getResources().getDrawable(R.drawable.telerik);
+            case 15: return getResources().getDrawable(R.drawable.silktest);
+            default: return getResources().getDrawable(R.drawable.defaultimg);
         }
-        return null;
     }
 }
